@@ -1,0 +1,12 @@
+#7/20/13
+#Project euler Problem 1
+#Task: Find the sum of all the multiples of 3 or 5 below 1000
+#Method: Loop through all numbers through 1000 and yeild numbers divisible by 3 or 5
+print ("Range:")
+x = 1000000000 
+'''input(">>>")'''
+def multiples():
+        for number in range(0, x):#loops through each number
+            if not number % 3 or not number % 5:
+                yield number
+print (sum(multiples()))
