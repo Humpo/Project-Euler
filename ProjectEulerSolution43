@@ -1,0 +1,26 @@
+#PE challenge 43  
+def main():
+    first_pan = '0123456789'
+    nums = [2,3,5,7,11,13,17]
+    pan_gen = permutations(first_pan, 10)#generator instance
+    tot_sum=0
+    while True:
+        try:new_pan=next(pan_gen)#next sequence pandigital number
+        except StopIteration:print("Done!");break#if no more break loop
+        for i in range(len(nums)):
+            Int=''.join(new_pan[i+1:i+4])#num creation
+            if int(Int)%nums[i]==0:#if num true go to next case
+                if i==len(nums)-1:
+                    tot_sum+=int(''.join(new_pan))
+            else:break#if fails divisibility text go to next pan
+    print (tot_sum)
+if __name__=="__main__":
+    from itertools import permutations
+    main()
+    #https://projecteuler.net/problem=43
+    #logical sequence
+    #1.Create permutation pandigital number
+    #2.Check slice divisibility with primes
+    #3.If false go to step 1
+    #4.Else add pandigital number to sum
+    #Complete until no more pandigital numbers
