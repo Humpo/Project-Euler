@@ -1,0 +1,44 @@
+def bot_fib_sequence():#fib generator
+    a, b = 1, 1
+    while True:
+        yield a%10**9
+        a, b = b, (a + b)
+def top_fib_sequence(n):#returns top 9 numbers (or less) for nth fib number
+    '''
+    phi = (1 + sqrt(5)) / 2
+    fib number of digits (T) = n * log10(phi) + log10(1/sqrt(5))
+    answer = int((pow(10, T – int(T) + num of digits we want - 1)))
+    top 9 numbers based on these formulas
+    '''
+    top = n * log10(((1 + sqrt(5)) / 2)) + log10(1/sqrt(5)) #first line of math magic
+    top = int((pow(10, top - int(top) + 8)))#this is the second line of math magic
+    return top
+def is_pandigital(num):
+    #checks if it's a pandigital number 1-9
+    #loops back and forwards to check
+    #digits = ''.join(map(str, range(1, 10)))
+    digits = '123456789'
+    num = str(num)
+    for i in digits:
+        if str(i) not in num[0:9]:return False
+        if str(i) not in num[-9:]:return False
+    return True
+def main():
+    bot_fib = bot_fib_sequence()#fibonacci generator instance
+    count=1
+    while True:
+        bot = next(bot_fib)
+        top = top_fib_sequence(count)
+        if is_pandigital(top) or is_pandigital(bot):
+            print(str(top)+' '+str(bot))
+            print(str(is_pandigital(top))+' '+str(is_pandigital(bot)))
+            print(count)
+        if is_pandigital(top) and is_pandigital(bot):
+           print (count)
+           break
+        count+=1
+if __name__=="__main__":#main idea when completing the problem. Just dont compute the middle
+    from math import sqrt
+    from math import log10
+    main()
+    #project Euler problem 104
